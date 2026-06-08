@@ -1,0 +1,30 @@
+body {
+  background-color: white;
+}
+
+.navbar {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.slider-img {
+  height: 80vh;
+  object-fit: cover;
+}
+
+.product-img {
+  height: 250px;
+  object-fit: cover;
+}
+
+.card {
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+footer {
+  margin-top: 50px;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ElectroShop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold text-warning" href="index.html">ElectroShop</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Slider -->
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="assets/slider1.jpg" class="d-block w-100 slider-img" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/slider2.jpg" class="d-block w-100 slider-img" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/slider3.jpg" class="d-block w-100 slider-img" alt="">
+      </div>
+    </div>
+  </div>
+
+  <!-- Products -->
+  <div class="container my-5">
+    <h2 class="text-center text-warning mb-4">Our Electrical Products</h2>
+    <div class="row g-4">
+      <script>
+        const products = [
+          {id:1, name:"Cooler", price:6499, img:"assets/cooler.jpg"},
+          {id:2, name:"Fridge", price:12999, img:"assets/fridge.jpg"},
+          {id:3, name:"Washing Machine", price:14499, img:"assets/washingmachine.jpg"},
+          {id:4, name:"Fan", price:2499, img:"assets/fan.jpg"},
+          {id:5, name:"Camera", price:8999, img:"assets/camera.jpg"},
+          {id:6, name:"Phone", price:9999, img:"assets/phone.jpg"}
+        ];
+
+        document.write(
+          products.map(p => `
+            <div class="col-md-4">
+              <div class="card shadow">
+                <img src="${p.img}" class="card-img-top product-img" alt="${p.name}">
+                <div class="card-body text-center">
+                  <h5>${p.name}</h5>
+                  <p>₹${p.price}</p>
+                  <button class="btn btn-warning" onclick='addToCart(${JSON.stringify(p)})'>Add to Cart</button>
+                </div>
+              </div>
+            </div>
+          `).join('')
+        );
+      </script>
+    </div>
+  </div>
+
+  <footer class="text-center bg-dark text-white py-3">
+    © 2025 ElectroShop | All Rights Reserved
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Add to cart system using localStorage
+    function addToCart(product) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      alert(product.name + " added to cart!");
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    updateCartCount();
+  </script>
+</body>
+</html>
